@@ -6,21 +6,34 @@ namespace Kea.BasicWebService.Service
     [Route("api/[controller]")]
     public class TodoController : Controller
     {
-        public TodoController()
-        {
-
-        }
+        private static readonly List<string> Todos = new List<string>
+            {
+                "Do shopping", 
+                "Walk the dog",
+                "Be happy",
+                "Praise Satan"
+            };
 
         [HttpGet]
         public IEnumerable<string> GetAll()
         {
-            return new[] {"Do shopping", "Walk the dog"};
+            return Todos;
         }
 
-        [HttpGet("{id}", Name = "GetTodo")]
-        public IActionResult GetById(long id)
+        [HttpPost]
+        public IActionResult AddTodo([FromBody] string todo)
         {
-            return new ObjectResult($"The id was: {id}");
+            Todos.Add(todo);
+
+            return Ok();
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteTodo([FromBody] int index)
+        {
+            Todos.RemoveAt(index);
+
+            return Ok();
         }
     }
 }

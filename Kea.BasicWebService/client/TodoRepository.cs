@@ -1,7 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Kea.BasicWebService.Client
 {
@@ -21,6 +25,20 @@ namespace Kea.BasicWebService.Client
             var result = await _client.GetStringAsync(_url);
 
             return JsonConvert.DeserializeObject<List<string>>(result);
+        }
+
+        public async Task Add(string todo)
+        {
+            var json = new JObject
+            {
+                ["todo"] = todo
+            };
+            var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+
+            var response = await _client.PostAsync(_url, content);
+            
+            if (response.StatusCode != HttpStatusCode.OK)
+                 throw new InvalidOperationException("The todo could not be saved in the todos.");
         }
     }
 }

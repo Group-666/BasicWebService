@@ -22,7 +22,9 @@ namespace Kea.BasicWebService.Client
             {
                 if (line.ToLower().StartsWith("add "))
                 {
-                    Console.WriteLine("Adding todo.");
+                    var todo = line.Substring(4);
+                    await repo.Add(todo);
+                    Console.WriteLine("Added!");
                 }
                 else if (line.ToLower().StartsWith("remove "))
                 {

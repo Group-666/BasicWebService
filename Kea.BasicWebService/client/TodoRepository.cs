@@ -31,7 +31,7 @@ namespace Kea.BasicWebService.Client
         {
             var json = new JObject
             {
-                ["todo"] = todo
+                ["Description"] = todo
             };
             var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
 

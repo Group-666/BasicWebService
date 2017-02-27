@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,8 +29,8 @@ namespace Kea.BasicWebService.Service
             return Ok();
         }
 
-        [HttpDelete]
-        public IActionResult DeleteTodo([FromBody] int index)
+        [HttpDelete("{index}")]
+        public IActionResult DeleteTodo(int index)
         {
             Todos.RemoveAt(index);
 

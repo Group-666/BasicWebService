@@ -27,6 +27,14 @@ namespace Kea.BasicWebService.Client
             return JsonConvert.DeserializeObject<List<string>>(result);
         }
 
+        public async Task Remove(int index)
+        {
+            var response = await _client.DeleteAsync(_url + "/" + index);
+            
+            if (response.StatusCode != HttpStatusCode.OK)
+                 throw new InvalidOperationException("The todo could not be removed in the todos.");
+        }
+
         public async Task Add(string todo)
         {
             var json = new JObject

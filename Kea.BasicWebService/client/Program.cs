@@ -23,12 +23,18 @@ namespace Kea.BasicWebService.Client
                 if (line.ToLower().StartsWith("add "))
                 {
                     var todo = line.Substring(4);
+                
                     await repo.Add(todo);
+                
                     Console.WriteLine("Added!");
                 }
                 else if (line.ToLower().StartsWith("remove "))
                 {
-                    Console.WriteLine("Removing todo.");
+                    var index = int.Parse(line.Substring(7)) - 1;
+                
+                    await repo.Remove(index);
+                
+                    Console.WriteLine("Removed todo.");
                 }
                 else if (line.ToLower().StartsWith("show all"))
                 {

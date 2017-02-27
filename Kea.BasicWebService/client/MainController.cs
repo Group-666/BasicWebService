@@ -1,5 +1,4 @@
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Kea.BasicWebService.Client
@@ -28,7 +27,7 @@ namespace Kea.BasicWebService.Client
                 else if (line.ToLower().StartsWith("remove "))
                 {
                     var index = int.Parse(line.Substring(7)) - 1;
-                    await DeleteTodo(index);
+                    await RemoveTodo(index);
                 }
                 else if (line.ToLower().StartsWith("show all"))
                 {
@@ -37,12 +36,14 @@ namespace Kea.BasicWebService.Client
                 else
                     Console.WriteLine("Invalid command.");
             }
+
+            Console.WriteLine("bye.");
         }
 
         private async Task ShowAllTodos()
         {
             Console.WriteLine("Showing all.");
-            
+
             var todos = await _repository.GetAll();
             for (var i = 0; i < todos.Count; i++)
             {
@@ -50,7 +51,7 @@ namespace Kea.BasicWebService.Client
             }
         }
 
-        private async Task DeleteTodo(int index)
+        private async Task RemoveTodo(int index)
         {
             await _repository.Remove(index);
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,9 +22,11 @@ namespace Kea.BasicWebService.Service
         }
 
         [HttpPost]
-        public IActionResult AddTodo([FromBody] string todo)
+        public IActionResult AddTodo([FromBody] Todo todo)
         {
-            Todos.Add(todo);
+            Console.WriteLine(todo);
+
+            Todos.Add(todo.Description);
 
             return Ok();
         }

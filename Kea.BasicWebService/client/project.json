@@ -4,7 +4,9 @@
     "debugType": "portable",
     "emitEntryPoint": true
   },
-  "dependencies": {},
+  "dependencies": {
+    "Newtonsoft.Json": "*"
+  },
   "frameworks": {
     "netcoreapp1.1": {
       "dependencies": {
